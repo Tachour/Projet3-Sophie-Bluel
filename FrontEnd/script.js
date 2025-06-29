@@ -12,9 +12,7 @@ fetch("http://localhost:5678/api/works")
     allWorks = works; // on stocke les projets
     displayWorks(allWorks); // on les affiche dans la galerie
   })
-  .catch(error => {
-    console.error("Erreur lors de la récupération des travaux :", error);
-  });
+  
 
 // Fetch des catégories
 fetch("http://localhost:5678/api/categories")
@@ -23,9 +21,7 @@ fetch("http://localhost:5678/api/categories")
     console.log("Catégories récupérées :", categories);
     createFilterButtons(categories); // création des filtres
   })
-  .catch(error => {
-    console.error("Erreur lors de la récupération des catégories :", error);
-  });
+ 
 
 
 // ===============================
