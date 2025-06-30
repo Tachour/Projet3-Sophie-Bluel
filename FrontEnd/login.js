@@ -1,5 +1,3 @@
-console.log("Le script est bien chargé !");
-
 // ===============================
 // Authentification de l'utilisateur
 // ===============================
