@@ -2,9 +2,9 @@
 // ÉTAPE 1 : Récupération des données via fetch (en haut du code)
 // ===============================
 
-let allWorks = []; // Stockera tous les projets
+ let allWorks = []; // Stockera tous les projets
 
-// Fetch des projets
+// 1..Fetch des projets
 fetch("http://localhost:5678/api/works")
   .then(response => response.json())
   .then(works => {
@@ -12,28 +12,9 @@ fetch("http://localhost:5678/api/works")
     allWorks = works; // on stocke les projets
     displayWorks(allWorks); // on les affiche dans la galerie
   })
-  
 
-// Fetch des catégories
-fetch("http://localhost:5678/api/categories")
-  .then(response => response.json())
-  .then(categories => {
-    console.log("Catégories récupérées :", categories);
-    createFilterButtons(categories); // création des filtres
-  })
- 
-
-
-// ===============================
-// ÉTAPE 2 : Sélection des éléments du DOM
-// ===============================
-
-const gallery = document.querySelector(".gallery");       // zone d'affichage des projets
-const filtersContainer = document.getElementById("filters"); // zone des boutons de filtre
-
-
-// ===============================
-// ÉTAPE 3 : Fonction pour afficher les projets
+  // ===============================
+// Fonction pour afficher les projets
 // ===============================
 
 function displayWorks(works) {
@@ -55,9 +36,19 @@ function displayWorks(works) {
   });
 }
 
+const gallery = document.querySelector(".gallery");       // zone d'affichage des projets
+  
 
+// 1.2..Fetch des catégories
+fetch("http://localhost:5678/api/categories")
+  .then(response => response.json())
+  .then(categories => {
+    console.log("Catégories récupérées :", categories);
+    createFilterButtons(categories); // création des filtres
+  })
+ 
 // ===============================
-// ÉTAPE 4 : Fonction pour créer les boutons de filtre
+// Fonction pour créer les boutons de filtre
 // ===============================
 
 function createFilterButtons(categories) {
@@ -91,3 +82,14 @@ function createFilterButtons(categories) {
     });
   });
 }
+
+const filtersContainer = document.getElementById("filters"); // zone des boutons de filtre
+
+
+
+
+
+
+
+
+

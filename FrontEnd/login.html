@@ -4,11 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - Sophie Bluel</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="assets/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./assets/style.css">
+	<script src="login.js" defer></script>
+
 </head>
 <body>
   <header>
@@ -34,6 +36,8 @@
       <input type="password" id="password" name="password" required />
 
       <button type="submit">Se connecter</button>
+      <p id="error-message" style="display: none; color: red;"></p>
+
       <a href="#" class="forgot-password">Mot de passe oublié</a>
     </form>
   </main>
