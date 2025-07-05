@@ -2,14 +2,14 @@
 // Authentification de l'utilisateur
 // ===============================
 
-const form = document.querySelector(".login-form");
-const errorMsg = document.getElementById("error-message");
+const form = document.querySelector(".login-form")
+const errorMsg = document.getElementById("error-message")
 
 form.addEventListener("submit", function (e) {
-  e.preventDefault(); // Empêche le rechargement
+  e.preventDefault() // Empêche le rechargement
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value
+  const password = document.getElementById("password").value
 
   fetch("http://localhost:5678/api/users/login", {
     method: "POST",
@@ -27,17 +27,17 @@ form.addEventListener("submit", function (e) {
     .then(result => {
       if (result.status === 200) {
         // Connexion réussie
-        localStorage.setItem("token", result.body.token);
-        window.location.href = "index.html";
+        localStorage.setItem("token", result.body.token)
+        window.location.href = "index.html"
       } else {
         // Mauvais identifiants
-        errorMsg.innerText = "Email ou mot de passe incorrect.";
-        errorMsg.style.display = "block";
+        errorMsg.innerText = "Email ou mot de passe incorrect."
+        errorMsg.style.display = "block"
       }
     })
     .catch(error => {
-      console.error("Erreur :", error);
-      errorMsg.innerText = "Erreur serveur. Veuillez réessayer.";
-      errorMsg.style.display = "block";
-    });
-});
+      console.error("Erreur :", error)
+      errorMsg.innerText = "Erreur serveur. Veuillez réessayer."
+      errorMsg.style.display = "block"
+    })
+})
