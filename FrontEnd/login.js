@@ -31,13 +31,9 @@ form.addEventListener("submit", function (e) {
         window.location.href = "index.html"
       } else {
         // Mauvais identifiants
-        errorMsg.innerText = "Email ou mot de passe incorrect."
+        errorMsg.innerText = '"Erreur dans l’identifiant ou le mot de passe"'
         errorMsg.style.display = "block"
       }
     })
-    .catch(error => {
-      console.error("Erreur :", error)
-      errorMsg.innerText = "Erreur serveur. Veuillez réessayer."
-      errorMsg.style.display = "block"
-    })
+    
 })

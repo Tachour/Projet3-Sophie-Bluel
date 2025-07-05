@@ -1,3 +1,5 @@
+const token = localStorage.getItem("token")
+
 // ===============================
 // ÉTAPE 1 : Récupération des données via fetch (en haut du code)
 // ===============================
@@ -19,7 +21,7 @@ fetchWorks()
 // ===============================
 
 function displayWorks(works) {
-  gallery.innerHTML = ""; // Vide la galerie
+  gallery.innerHTML = "" // Vide la galerie
 
   works.forEach(work => {
     const figure = document.createElement("figure")
@@ -88,6 +90,28 @@ function createFilterButtons(categories) {
 }
 
 const filtersContainer = document.getElementById("filters") // zone des boutons de filtre
+
+// ===============================
+// Boutons modifier et barre noir une fois connecté
+// ===============================
+if (token) {
+  const modeEdition = document.getElementById("mode-edition");
+  if (modeEdition) {
+    modeEdition.classList.remove("hidden");
+  }
+
+  const editButtons = document.querySelectorAll(".edit-works");
+  editButtons.forEach(btn => btn.classList.remove("hidden"));
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const editButton = document.querySelector(".edit-works")
+
+  if (token && editButton) {
+    editButton.classList.remove("hidden")
+  }
+})
+
+
 
 
 
