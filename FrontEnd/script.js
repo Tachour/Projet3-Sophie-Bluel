@@ -1,9 +1,7 @@
-const token = localStorage.getItem("token")
+// ****** Stckage du TOKEN ******
+const token = localStorage.getItem("token") 
 
-// ===============================
 // ÉTAPE 1 : Récupération des données via fetch (en haut du code)
-// ===============================
-
  let allWorks = []; // Stockera tous les projets
 
 // 1..Fetch des projets
@@ -16,10 +14,7 @@ async function fetchWorks() {
 }
 fetchWorks()
 
-// ===============================
-// Fonction pour afficher les projets
-// ===============================
-
+// ****** Fonction pour afficher les projets ******
 function displayWorks(works) {
   gallery.innerHTML = "" // Vide la galerie
 
@@ -52,20 +47,16 @@ async function fetchCategories() {
 }
 fetchCategories()
 
- 
-// ===============================
-// Fonction pour créer les boutons de filtre
-// ===============================
-
+// ****** Fonction pour créer les boutons de filtre ******
 function createFilterButtons(categories) {
-  // Bouton "Tous"
+  // ****** Bouton "Tous" ******
   const allBtn = document.createElement("button")
   allBtn.textContent = "Tous"
   allBtn.classList.add("filter-btn")
   allBtn.dataset.id = 0
   filtersContainer.appendChild(allBtn)
 
-  // Boutons pour chaque catégorie
+  // ****** Boutons pour chaque catégorie ******
   categories.forEach(category => {
     const btn = document.createElement("button")
     btn.textContent = category.name
@@ -74,7 +65,7 @@ function createFilterButtons(categories) {
     filtersContainer.appendChild(btn)
   })
 
-  // Gestion des clics sur les boutons
+  // ****** Gestion des clics sur les boutons ******
   const buttons = document.querySelectorAll(".filter-btn")
   buttons.forEach(button => {
     button.addEventListener("click", () => {
@@ -91,25 +82,32 @@ function createFilterButtons(categories) {
 
 const filtersContainer = document.getElementById("filters") // zone des boutons de filtre
 
-// ===============================
-// Boutons modifier et barre noir une fois connecté
-// ===============================
-if (token) {
-  const modeEdition = document.getElementById("mode-edition");
-  if (modeEdition) {
-    modeEdition.classList.remove("hidden");
-  }
+// ****** Bouton modifier + barre noire + logout une fois connecté ******
 
-  const editButtons = document.querySelectorAll(".edit-works");
-  editButtons.forEach(btn => btn.classList.remove("hidden"));
-}
 document.addEventListener("DOMContentLoaded", () => {
-  const editButton = document.querySelector(".edit-works")
+  const token = localStorage.getItem("token")
 
-  if (token && editButton) {
-    editButton.classList.remove("hidden")
+  if (token) {
+    // Affiche la barre noire
+    const modeEdition = document.getElementById("mode-edition")
+    if (modeEdition) modeEdition.classList.remove("hidden")
+
+    // Affiche le bouton modifier
+    const editButton = document.querySelector(".edit-works")
+    if (editButton) editButton.classList.remove("hidden");
+
+    // Change "Login" en "Logout"
+    const loginLink = document.getElementById("login-link")
+    if (loginLink) {
+      loginLink.textContent = "Logout"
+    }
   }
-})
+});
+
+
+
+
+
 
 
 

@@ -1,6 +1,4 @@
-// ===============================
-// Authentification de l'utilisateur
-// ===============================
+// ****** Authentification de l'utilisateur ******
 
 const form = document.querySelector(".login-form")
 const errorMsg = document.getElementById("error-message")
