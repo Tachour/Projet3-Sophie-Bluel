@@ -85,24 +85,34 @@ const filtersContainer = document.getElementById("filters") // zone des boutons 
 // ****** Bouton modifier + barre noire + logout une fois connecté ******
 
 document.addEventListener("DOMContentLoaded", () => {
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
+  const loginLink = document.getElementById("loginLink");
 
   if (token) {
-    // Affiche la barre noire
-    const modeEdition = document.getElementById("mode-edition")
-    if (modeEdition) modeEdition.classList.remove("hidden")
+    // Mode connecté
+    const modeEditionBar = document.getElementById("mode-edition");
+    const editButton = document.querySelector(".edit-works");
 
-    // Affiche le bouton modifier
-    const editButton = document.querySelector(".edit-works")
+    if (modeEditionBar) modeEditionBar.classList.remove("hidden");
     if (editButton) editButton.classList.remove("hidden");
 
-    // Change "Login" en "Logout"
-    const loginLink = document.getElementById("login-link")
-    if (loginLink) {
-      loginLink.textContent = "Logout"
-    }
+    // Affiche "logout" et désactive le lien
+    loginLink.textContent = "logout";
+    loginLink.href = "#";
+
+    loginLink.addEventListener("click", (e) => {
+      e.preventDefault(); // empêche la navigation
+      localStorage.removeItem("token");
+      window.location.reload();
+    });
+
+  } else {
+    // Mode non connecté
+    loginLink.textContent = "login";
+    loginLink.href = "login.html"; // redirige vers la page de connexion
   }
 });
+
 
 
 

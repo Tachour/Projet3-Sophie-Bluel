@@ -32,6 +32,12 @@ form.addEventListener("submit", function (e) {
         errorMsg.innerText = '"Erreur dans l’identifiant ou le mot de passe"'
         errorMsg.style.display = "block"
       }
+      // Ajoute l'action de déconnexion
+      
+	loginLink.addEventListener("click", () => {
+        localStorage.removeItem("token"); // Supprime le token
+        window.location.reload(); // Recharge la page
+      });
     })
     
 })
