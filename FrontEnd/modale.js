@@ -34,34 +34,33 @@ function displayWorksInModal(works) {
 
     deleteBtn.addEventListener("click", async () => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token")
 
     const response = await fetch(`http://localhost:5678/api/works/${work.id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`
       }
-    });
+    })
 
     if (response.ok) {
-      // ✅ Supprimer la miniature dans la modale
-      figure.remove();
+      
+      figure.remove()
 
-      // ✅ Supprimer aussi le projet dans la galerie principale
-      const mainGallery = document.querySelector(".gallery");
-      const mainProject = mainGallery.querySelector(`[data-id="${work.id}"]`);
+      const mainGallery = document.querySelector(".gallery")
+      const mainProject = mainGallery.querySelector(`[data-id="${work.id}"]`)
       if (mainProject) {
-        mainProject.remove();
+        mainProject.remove()
       }
 
     } else {
-      console.error("Erreur lors de la suppression du projet");
+      console.error("Erreur lors de la suppression du projet")
     }
 
   } catch (error) {
-    console.error("Erreur réseau :", error);
+    console.error("Erreur réseau :", error)
   }
-});
+})
 
 
     figure.appendChild(img)

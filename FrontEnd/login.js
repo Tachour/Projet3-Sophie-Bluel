@@ -35,9 +35,9 @@ form.addEventListener("submit", function (e) {
       // Ajoute l'action de déconnexion
       
 	loginLink.addEventListener("click", () => {
-        localStorage.removeItem("token"); // Supprime le token
-        window.location.reload(); // Recharge la page
-      });
+        localStorage.removeItem("token") // Supprime le token
+        window.location.reload() // Recharge la page
+      })
     })
     
 })
