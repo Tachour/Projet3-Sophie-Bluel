@@ -1,16 +1,17 @@
-// ****** Stckage du TOKEN ******
+// ****** Stockage du TOKEN ******
 const token = localStorage.getItem("token") 
 
 // ÉTAPE 1 : Récupération des données via fetch (en haut du code)
- let allWorks = []; // Stockera tous les projets
+ let allWorks = [] // Stockera tous les projets
 
 // 1..Fetch des projets
 async function fetchWorks() {
     const response = await fetch("http://localhost:5678/api/works")
     const works = await response.json()
     console.log("Travaux récupérés :", works)
-    allWorks = works;
+    allWorks = works
     displayWorks(allWorks)
+    displayWorksInModal(allWorks)   // Pour la modale
 }
 fetchWorks()
 
@@ -20,6 +21,7 @@ function displayWorks(works) {
 
   works.forEach(work => {
     const figure = document.createElement("figure")
+    figure.dataset.id = work.id
 
     const img = document.createElement("img")
     img.src = work.imageUrl
@@ -85,33 +87,33 @@ const filtersContainer = document.getElementById("filters") // zone des boutons 
 // ****** Bouton modifier + barre noire + logout une fois connecté ******
 
 document.addEventListener("DOMContentLoaded", () => {
-  const token = localStorage.getItem("token");
-  const loginLink = document.getElementById("loginLink");
+  const token = localStorage.getItem("token")
+  const loginLink = document.getElementById("loginLink")
 
   if (token) {
     // Mode connecté
-    const modeEditionBar = document.getElementById("mode-edition");
-    const editButton = document.querySelector(".edit-works");
+    const modeEditionBar = document.getElementById("mode-edition")
+    const editButton = document.querySelector(".edit-works")
 
-    if (modeEditionBar) modeEditionBar.classList.remove("hidden");
-    if (editButton) editButton.classList.remove("hidden");
+    if (modeEditionBar) modeEditionBar.classList.remove("hidden")
+    if (editButton) editButton.classList.remove("hidden")
 
     // Affiche "logout" et désactive le lien
-    loginLink.textContent = "logout";
-    loginLink.href = "#";
+    loginLink.textContent = "logout"
+    loginLink.href = "#"
 
     loginLink.addEventListener("click", (e) => {
-      e.preventDefault(); // empêche la navigation
-      localStorage.removeItem("token");
-      window.location.reload();
-    });
+      e.preventDefault() // empêche la navigation
+      localStorage.removeItem("token")
+      window.location.reload()
+    })
 
   } else {
     // Mode non connecté
-    loginLink.textContent = "login";
-    loginLink.href = "login.html"; // redirige vers la page de connexion
+    loginLink.textContent = "login"
+    loginLink.href = "login.html" // redirige vers la page de connexion
   }
-});
+})
 
 
 
