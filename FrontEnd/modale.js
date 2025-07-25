@@ -115,28 +115,41 @@ loadCategoriesInSelect()
 const inputFile = document.getElementById("imageUpload")
 const previewContainer = document.getElementById("previewContainer")
 
+
 inputFile.addEventListener("change", () => {
   const file = inputFile.files[0]
+  const uploadArea = document.querySelector(".upload-area")
+
   if (file) {
     const reader = new FileReader()
     reader.onload = () => {
       previewContainer.innerHTML = `<img src="${reader.result}" class="preview-img" />`
       previewContainer.style.display = "block"
+
+      // Cache les autres éléments de la zone upload
+      uploadArea.querySelectorAll("i, label, small").forEach(el => el.style.display = "none")
+
       checkFormFields()
     }
     reader.readAsDataURL(file)
   } else {
+    previewContainer.innerHTML = ""
     previewContainer.style.display = "none"
+
+    // Réaffiche les éléments si aucune image
+    uploadArea.querySelectorAll("i, label, small").forEach(el => el.style.display = "block")
+
     checkFormFields()
   }
 })
+
 
 // === VALIDATION DYNAMIQUE DU FORMULAIRE ===
 const titleInput = document.getElementById("titleInput")
 const categorySelect = document.getElementById("categorySelect")
 const submitBtn = document.querySelector(".submit-btn")
 
-;[titleInput, categorySelect].forEach(input => {
+[titleInput, categorySelect].forEach(input => {
   input.addEventListener("input", checkFormFields)
 })
 inputFile.addEventListener("change", checkFormFields)

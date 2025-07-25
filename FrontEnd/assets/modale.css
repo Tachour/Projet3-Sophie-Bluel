@@ -231,8 +231,7 @@
 /* === BOUTON VALIDER === */
 .submit-btn {
   margin-top: 20px;
-  background-color: #A7A7A7; /* gris par défaut */
-  color: white;
+  background-color: #A7A7A7 !important;
   border: none;
   border-radius: 60px;
   padding: 10px 30px;
@@ -246,7 +245,7 @@
 
 /* Quand tous les champs sont valides */
 .submit-btn:hover {
-  background-color: #1D6154; /* vert */
+  background-color: #1D6154 !important; /* vert */
   cursor: pointer;
 }
 
