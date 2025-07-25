@@ -45,19 +45,58 @@
 	<section id="portfolio">
 		<h2>Mes Projets <span class="edit-works hidden"><i class="fa-regular fa-pen-to-square"></i>modifier</span></h2>
 	<!-- ===== MODALE ===== -->
-	<dialog id="galleryModale" class="modale">
-  		<div class="modale-content">
-    		<button id="closeModaleBtn" class="close-btn">&times;</button>
-    		<h2>Galerie photo</h2>
+	<!-- ===== MODALE ===== -->
+<dialog id="galleryModale" class="modale">
+  <div class="modale-content">
+    <!-- Bouton de fermeture (croix) -->
+    <button id="closeModaleBtn" class="close-btn">&times;</button>
 
-    		<div class="gallery-modale" id="modaleGallery">
-      	<!-- Zone d'injection des images -->
-    		</div>
-			<hr class="separateur">
+    <!-- === VUE 1 : GALERIE PHOTO === -->
+    <div id="galleryView">
+      <h2>Galerie photo</h2>
+      <div class="gallery-modale" id="modaleGallery">
+        <!-- Zone d'injection des images -->
+      </div>
+      <hr class="separateur">
+      <button id="addPhotoBtn" class="add-btn">Ajouter une photo</button>
+    </div>
 
-    		<button id="addPhotoBtn" class="add-btn">Ajouter une photo</button>
-  		</div>
-	</dialog>
+    
+    <!-- === VUE 2 : FORMULAIRE AJOUT PHOTO === -->
+	<div id="addPhotoView" class="hidden">
+  <!-- Bouton retour (flèche à gauche) -->
+  <button id="backToGalleryBtn" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+
+  <!-- Formulaire d'ajout -->
+  <form id="photoForm">
+    <h2>Ajout photo</h2>
+
+    <div class="upload-area">
+      <i class="fa-regular fa-image"></i>
+      <label for="imageUpload" class="upload-label">+ Ajouter photo</label>
+      <input type="file" id="imageUpload" name="image" accept="image/*" hidden>
+      <small>jpg, png : 4mo max</small>
+      <div id="previewContainer"></div>
+    </div>
+
+    <label for="titleInput">Titre</label>
+    <input type="text" id="titleInput" name="title" required>
+
+    <label for="categorySelect">Catégorie</label>
+    <select id="categorySelect" name="category" required></select>
+
+    <input type="submit" value="Valider" class="submit-btn" disabled>
+  </form>
+</div>
+
+
+  </div>
+</dialog>
+
+
+
 
 		<!-- Menu de filtres dynamique -->
   		<div id="filters"></div>
