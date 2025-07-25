@@ -168,7 +168,8 @@ const titleInput = document.getElementById("titleInput")
 const categorySelect = document.getElementById("categorySelect")
 const submitBtn = document.querySelector(".submit-btn")
 
-;[titleInput, categorySelect].forEach(input => {
+const fields = [titleInput, categorySelect]
+fields.forEach(input => {
   input.addEventListener("input", checkFormFields)
 })
 inputFile.addEventListener("change", checkFormFields)
