@@ -3,30 +3,42 @@ const openModalBtn = document.querySelector(".edit-works")
 const modal = document.getElementById("galleryModale")
 const closeModalBtn = document.getElementById("closeModaleBtn")
 
+const galerieView = document.getElementById("galleryView")
+const formView = document.getElementById("addPhotoView")
+
+// ✅ On attend que le DOM soit prêt pour vérifier le token
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("token")
+
+  if (!token && openModalBtn) {
+    openModalBtn.style.display = "none"  // Masque bouton en mode déconnecté
+  } else if (token && openModalBtn) {
+    openModalBtn.style.display = "inline-block" // Affiche bouton en mode connecté
+  }
+})
+
+// Ouverture de la modale (uniquement si bouton visible)
 if (openModalBtn) {
   openModalBtn.addEventListener("click", () => {
-    // Toujours revenir à la vue principale
-    galerieView.classList.remove("hidden")
-    formView.classList.add("hidden")
+    resetToMainView() // Revenir toujours à la vue principale
     modal.showModal()
-  })
-
-
-if (closeModalBtn) {
-  closeModalBtn.addEventListener("click", () => {
-    modal.close()
   })
 }
 
-// Ferme la modale au clic en dehors
+// Fermeture croix
+if (closeModalBtn) {
+  closeModalBtn.addEventListener("click", () => {
+    modal.close()
+    resetToMainView()
+  })
+}
+
+// Fermer au clic en dehors
 modal.addEventListener("click", (event) => {
   const modalContent = modal.querySelector(".modale-content")
   if (!modalContent.contains(event.target)) {
     modal.close()
-
-    // Réinitialise toujours sur la vue principale
-    galerieView.classList.remove("hidden")
-    formView.classList.add("hidden")
+    resetToMainView()
   }
 })
 
@@ -40,6 +52,11 @@ function resetToMainView() {
   previewContainer.style.display = "none"
   submitBtn.classList.remove("active")
   submitBtn.disabled = true
+
+  // Réaffiche la zone upload
+  document.querySelectorAll(".upload-area i, .upload-area label, .upload-area small").forEach(el => {
+    el.style.display = "block"
+  })
 }
 
 // ====== AFFICHAGE DES PROJETS DANS LA MODALE ======
@@ -88,8 +105,6 @@ function displayWorksInModal(works) {
 }
 
 // === GESTION DES VUES ===
-const galerieView = document.getElementById("galleryView")
-const formView = document.getElementById("addPhotoView")
 const btnAddPhoto = document.getElementById("addPhotoBtn")
 const backToGalleryBtn = document.getElementById("backToGalleryBtn")
 
@@ -125,7 +140,6 @@ loadCategoriesInSelect()
 const inputFile = document.getElementById("imageUpload")
 const previewContainer = document.getElementById("previewContainer")
 
-
 inputFile.addEventListener("change", () => {
   const file = inputFile.files[0]
   const uploadArea = document.querySelector(".upload-area")
@@ -136,7 +150,6 @@ inputFile.addEventListener("change", () => {
       previewContainer.innerHTML = `<img src="${reader.result}" class="preview-img" />`
       previewContainer.style.display = "block"
 
-      // Cache les autres éléments de la zone upload
       uploadArea.querySelectorAll("i, label, small").forEach(el => el.style.display = "none")
 
       checkFormFields()
@@ -145,21 +158,17 @@ inputFile.addEventListener("change", () => {
   } else {
     previewContainer.innerHTML = ""
     previewContainer.style.display = "none"
-
-    // Réaffiche les éléments si aucune image
     uploadArea.querySelectorAll("i, label, small").forEach(el => el.style.display = "block")
-
     checkFormFields()
   }
 })
-
 
 // === VALIDATION DYNAMIQUE DU FORMULAIRE ===
 const titleInput = document.getElementById("titleInput")
 const categorySelect = document.getElementById("categorySelect")
 const submitBtn = document.querySelector(".submit-btn")
 
-[titleInput, categorySelect].forEach(input => {
+;[titleInput, categorySelect].forEach(input => {
   input.addEventListener("input", checkFormFields)
 })
 inputFile.addEventListener("change", checkFormFields)
