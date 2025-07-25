@@ -3,23 +3,33 @@ const openModalBtn = document.querySelector(".edit-works")
 const modal = document.getElementById("galleryModale")
 const closeModalBtn = document.getElementById("closeModaleBtn")
 
-openModalBtn.addEventListener("click", () => {
-  resetToMainView() // Toujours revenir sur la vue principale
-  modal.showModal()
-})
+if (openModalBtn) {
+  openModalBtn.addEventListener("click", () => {
+    // Toujours revenir à la vue principale
+    galerieView.classList.remove("hidden")
+    formView.classList.add("hidden")
+    modal.showModal()
+  })
 
-closeModalBtn.addEventListener("click", () => {
-  modal.close()
-})
 
-// Ferme la modale au clic en dehors (overlay)
+if (closeModalBtn) {
+  closeModalBtn.addEventListener("click", () => {
+    modal.close()
+  })
+}
+
+// Ferme la modale au clic en dehors
 modal.addEventListener("click", (event) => {
   const modalContent = modal.querySelector(".modale-content")
   if (!modalContent.contains(event.target)) {
     modal.close()
-    resetToMainView() // On reset aussi si fermeture par clic extérieur
+
+    // Réinitialise toujours sur la vue principale
+    galerieView.classList.remove("hidden")
+    formView.classList.add("hidden")
   }
 })
+
 
 // === Fonction pour revenir à la vue principale ===
 function resetToMainView() {
