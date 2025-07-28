@@ -366,6 +366,14 @@ footer {
   font-size: 14px;
 }
 
+/* Force les nouvelles images à respecter le ratio 304:405 */
+.gallery figure:last-child img {
+  width: 100%;
+  aspect-ratio: 304 / 405; /* même ratio que les images originales */
+  object-fit: cover;       /* rogne proprement sans déformer */
+}
+
+
 
 
 

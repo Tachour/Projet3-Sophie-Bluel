@@ -68,6 +68,7 @@ function displayWorksInModal(works) {
   works.forEach(work => {
     const figure = document.createElement("figure")
     figure.classList.add("modale-figure")
+    figure.dataset.id = work.id
 
     const img = document.createElement("img")
     img.src = work.imageUrl
@@ -86,12 +87,14 @@ function displayWorksInModal(works) {
         })
 
         if (response.ok) {
-          figure.remove()
-          const mainGallery = document.querySelector(".gallery")
-          const mainProject = mainGallery.querySelector(`[data-id="${work.id}"]`)
+          const modaleProject = modaleGallery.querySelector(`figure[data-id="${work.id}"]`)
+          if (modaleProject) modaleProject.remove()
+
+          const mainProject = document.querySelector(`.gallery [data-id="${work.id}"]`)
           if (mainProject) mainProject.remove()
-        } else {
-          console.error("Erreur lors de la suppression du projet")
+
+          allWorks = allWorks.filter(item => item.id !== work.id)
+          displayWorksInModal(allWorks)
         }
       } catch (error) {
         console.error("Erreur réseau :", error)
@@ -101,8 +104,10 @@ function displayWorksInModal(works) {
     figure.appendChild(img)
     figure.appendChild(deleteBtn)
     modaleGallery.appendChild(figure)
-  })
-}
+  })   
+}       
+
+
 
 // === GESTION DES VUES ===
 const btnAddPhoto = document.getElementById("addPhotoBtn")
