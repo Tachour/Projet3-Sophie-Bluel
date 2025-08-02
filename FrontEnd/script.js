@@ -10,7 +10,7 @@ async function fetchWorks() {
     const works = await response.json()
     allWorks = works
     displayWorks(allWorks)           // Galerie pricipale
-    displayWorksInModal(allWorks)   // Pour la modale
+    displayWorksInModal(allWorks)   // la modale
 }
 fetchWorks()
 
@@ -82,7 +82,7 @@ function createFilterButtons(categories) {
 
 const filtersContainer = document.getElementById("filters") // zone des boutons de filtre
 
-// ****** Bouton modifier + barre noire + logout une fois connecté ******
+// ****** Bouton modifier + barre noire + logout en mode connecté ******
 
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token")

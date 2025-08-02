@@ -237,13 +237,13 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color: #3a3a3a;          /* gris foncé */
+  color: #3a3a3a;          
   font-weight: 400;
   transition: color 0.2s ease;
 }
 
 nav a:hover {
-  color: #000000;          /* devient noir au survol */
+  color: #000000;          
 }
 
 nav img {
@@ -295,13 +295,13 @@ nav img {
 .login-form button {
   background-color: #1D6154;
   color: white;
-  padding: 10px 30px; /* largeur auto */
+  padding: 10px 30px; 
   border: none;
   border-radius: 60px;
   font-size: 1em;
   font-weight: 600;
   cursor: pointer;
-  align-self: center; /* bouton centré */
+  align-self: center; 
 }
 
 .login-form button:hover {
@@ -325,7 +325,7 @@ footer {
   color: #3a3a3a;
 }
 
-/****** Une fois connecté******/
+/****** Mode connecté******/
 
 /* Mode Edition (Bande noire) */
 .mode-edition {
@@ -336,10 +336,10 @@ footer {
   font-family: 'Work Sans', sans-serif;
   font-size: 14px;
 
-  position: fixed; /* 🔥 Important pour qu’elle reste en haut et sorte du flux */
+  position: fixed; 
   top: 0;
   left: 0;
-  width: 100vw; /* 🔥 Fait en sorte qu’elle prenne toute la largeur de l’écran */
+  width: 100vw; 
   z-index: 1000;
 }
 
@@ -370,7 +370,7 @@ footer {
 .gallery figure:last-child img {
   width: 100%;
   aspect-ratio: 304 / 405; /* même ratio que les images originales */
-  object-fit: cover;       /* rogne proprement sans déformer */
+  object-fit: cover;       
 }
 
 
