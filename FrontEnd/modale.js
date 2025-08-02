@@ -196,11 +196,35 @@ function checkFormFields() {
 // === ENVOI DU FORMULAIRE D'AJOUT ===
 const form = document.getElementById("photoForm")
 
+// Désactive par défaut au chargement
+submitBtn.disabled = true
+submitBtn.classList.remove("active")
+
+// --- Vérification dynamique des champs ---
+function checkFormFields() {
+  const image = inputFile.files[0]
+  const title = titleInput.value.trim()
+  const category = categorySelect.value
+
+  if (image && title && category) {
+    submitBtn.disabled = false
+    submitBtn.classList.add("active")
+  } else {
+    submitBtn.disabled = true
+    submitBtn.classList.remove("active")
+  }
+}
+
+// Vérifie les champs en direct
+inputFile.addEventListener("change", checkFormFields)
+titleInput.addEventListener("input", checkFormFields)
+categorySelect.addEventListener("input", checkFormFields)
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault()
 
   const image = inputFile.files[0]
-  const title = titleInput.value
+  const title = titleInput.value.trim()
   const category = categorySelect.value
   const token = localStorage.getItem("token")
 
@@ -227,6 +251,11 @@ form.addEventListener("submit", async (e) => {
     allWorks.push(newWork)
     displayWorks(allWorks)
     displayWorksInModal(allWorks)
+
+    // ✅ Vide le formulaire après envoi et remet le bouton en gris
+    form.reset()
+    submitBtn.disabled = true
+    submitBtn.classList.remove("active")
 
     resetToMainView()
     modal.showModal()

@@ -8,9 +8,8 @@ const token = localStorage.getItem("token")
 async function fetchWorks() {
     const response = await fetch("http://localhost:5678/api/works")
     const works = await response.json()
-    console.log("Travaux récupérés :", works)
     allWorks = works
-    displayWorks(allWorks)
+    displayWorks(allWorks)           // Galerie pricipale
     displayWorksInModal(allWorks)   // Pour la modale
 }
 fetchWorks()
@@ -43,8 +42,7 @@ const gallery = document.querySelector(".gallery")       // zone d'affichage des
 async function fetchCategories() {
   const response = await fetch("http://localhost:5678/api/categories")
   const categories = await response.json()
-  console.log("Catégories récupérées :", categories)
-
+  
   createFilterButtons(categories) 
 }
 fetchCategories()
