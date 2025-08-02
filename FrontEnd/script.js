@@ -1,16 +1,22 @@
 // ****** Stockage du TOKEN ******
 const token = localStorage.getItem("token") 
 
-// ÉTAPE 1 : Récupération des données via fetch (en haut du code)
- let allWorks = [] // Stockera tous les projets
+// ÉTAPE 1 : Récupération des données via fetch
+let allWorks = [] // Stockera tous les projets
 
 // 1..Fetch des projets
 async function fetchWorks() {
     const response = await fetch("http://localhost:5678/api/works")
     const works = await response.json()
-    allWorks = works
-    displayWorks(allWorks)           // Galerie pricipale
-    displayWorksInModal(allWorks)   // la modale
+
+    // Vérifie que chaque projet ait bien un categoryId
+    allWorks = works.map(work => ({
+        ...work,
+        categoryId: work.categoryId || (work.category ? work.category.id : null)
+    }))
+
+    displayWorks(allWorks)           // Galerie principale
+    displayWorksInModal(allWorks)    // la modale
 }
 fetchWorks()
 
@@ -35,8 +41,7 @@ function displayWorks(works) {
   })
 }
 
-const gallery = document.querySelector(".gallery")       // zone d'affichage des projets
-  
+const gallery = document.querySelector(".gallery") // zone d'affichage des projets
 
 // 1.2..Fetch des catégories
 async function fetchCategories() {
@@ -71,19 +76,19 @@ function createFilterButtons(categories) {
     button.addEventListener("click", () => {
       const categoryId = parseInt(button.dataset.id)
 
+      //  Utilise allWorks mis à jour + vérifie categoryId
       const filteredWorks = categoryId === 0
         ? allWorks
-        : allWorks.filter(work => work.categoryId === categoryId)
+        : allWorks.filter(work => parseInt(work.categoryId) === categoryId)
 
       displayWorks(filteredWorks) // affiche les projets filtrés
     })
   })
 }
 
-const filtersContainer = document.getElementById("filters") // zone des boutons de filtre
+const filtersContainer = document.getElementById("filters")
 
 // ****** Bouton modifier + barre noire + logout en mode connecté ******
-
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token")
   const loginLink = document.getElementById("loginLink")
@@ -112,20 +117,3 @@ document.addEventListener("DOMContentLoaded", () => {
     loginLink.href = "login.html" // redirige vers la page de connexion
   }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
